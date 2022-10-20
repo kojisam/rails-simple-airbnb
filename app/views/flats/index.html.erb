@@ -1,0 +1,33 @@
+<nav class="navbar navbar-dark "style="background-color: #e3f2fd;">
+	<h1>All our available Flats</h1>
+	<div class= "flex ml-auto form-inline">
+	<form class="form-inline my-2 my-lg-0 mx-3">
+            <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search" value="<%= params[:query] %>">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <%= link_to "Add Flat", new_flat_path, class: "btn btn-primary" %>
+          </div>
+  <!-- Navbar content -->
+</nav>
+
+<div class="container">
+<h1>All the flats (<%= Flat.count %>)</h1>
+<div class="row">
+<% @flats.each do |flat| %>
+<div class="col-md-4 my-3">
+<div class="card border-secondary" style="width: 18rem; height: 20rem;" >
+	<div class="card-body">
+		<h2 class="card-title"><%=flat.name%></h2>
+		<p class="card-text"><%=flat.address%></p>
+		<p class="card-text">$<%=flat.price_per_night%> per night</p>
+		<p class="card-text">Maximum number of guests: <%=flat.number_of_guests%></p>
+		<%= link_to "More info", flat_path(flat) %>
+		<%= link_to "Edit", edit_flat_path(flat) %>
+		<%= link_to "Remove", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" } %>
+	</div>
+
+</div>
+</div>
+<% end %>
+</div>
+</div>
